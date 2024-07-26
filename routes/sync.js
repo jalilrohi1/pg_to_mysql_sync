@@ -4,7 +4,7 @@ const authenticateToken = require("../middleware/auth");
 const validateApiKey = require("../middleware/apiKey");
 const router = express.Router();
 
-router.post("/sync", authenticateToken, validateApiKey, async (req, res) => {
+router.post("/", authenticateToken, validateApiKey, async (req, res) => {
   const { operation, data } = req.body;
 
   try {

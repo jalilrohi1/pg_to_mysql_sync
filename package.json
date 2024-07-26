@@ -1,0 +1,42 @@
+{
+    "name": "pg_to_mysql_sync",
+    "version": "1.0.0",
+    "description": "The API synchronizes data from Postgres to MySQL",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "nodemon index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jalilrohi1/pg_to_mysql_sync.git"
+    },
+    "keywords": [
+        "node",
+        "postgres",
+        "mysql",
+        "sync",
+        "synchronization"
+    ],
+    "author": "Abdul Jalil Rohi <jalilrohi1@gmail.com>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/jalilrohi1/pg_to_mysql_sync/issues"
+    },
+    "homepage": "https://github.com/jalilrohi1/pg_to_mysql_sync#readme",
+    "dependencies": {
+        "axios": "^1.7.2",
+        "dotenv": "^10.0.0",
+        "express": "^4.19.2",
+        "helmet": "^7.1.0",
+        "jsonwebtoken": "^9.0.2",
+        "mysql2": "^3.10.3",
+        "pg": "^8.6.0",
+        "pg-listen": "^1.7.0",
+        "sequelize": "^6.6.2"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.7"
+    }
+}
