@@ -16,7 +16,7 @@ const MysqlModel = mysqlSequelize.define(
       // Define another attribute named 'data'.
       type: DataTypes.STRING, // Specify the data type of the 'data' attribute as STRING.
     },
-    updatedAt: {
+    updatedat: {
       // Define an attribute named 'updatedAt'.
       type: DataTypes.DATE, // Specify the data type of the 'updatedAt' attribute as DATE.
     },

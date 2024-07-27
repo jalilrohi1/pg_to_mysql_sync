@@ -13,7 +13,8 @@ ComparisonCode/
 serverOrignal.js
 tokenGenerator.js
 tokenGeneratorNExp.js
-
+jwtGenratorPython.py
+JWTokenTesting.js
 # Logs
 *.log
 npm-debug.log*

@@ -9,6 +9,7 @@ router.post("/", authenticateToken, validateApiKey, async (req, res) => {
 
   try {
     if (operation === "INSERT" || operation === "UPDATE") {
+      console.log("Upserting data:", data);
       await MysqlModel.upsert(data);
     } else if (operation === "DELETE") {
       await MysqlModel.destroy({ where: { id: data.id } });

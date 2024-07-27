@@ -5,7 +5,7 @@ const payload = {
   role: "admin",
 };
 
-const secret = "your_jwt_secret";
+const secret = "Json_secretKeyForSpecialAPI";
 
 // Generate token without expiration
 const token = jwt.sign(payload, secret);

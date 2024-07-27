@@ -1,6 +1,15 @@
 const { ApiKey } = require("../models");
 require("dotenv").config();
 
+const validateApiKey = (req, res, next) => {
+  const apiKey = req.headers["x-api-key"];
+  if (apiKey === process.env.API_KEY) {
+    next();
+  } else {
+    res.status(403).send("Forbidden: Invalid API Key");
+  }
+};
+module.exports = validateApiKey;
 //  //This line defines an asynchronous function named validateApiKey. It takes three parameters: req (the request object), res (the response object), and next (a callback function to pass control to the next middleware function).
 // async function validateApiKey(req, res, next) {
 //    const apiKey = req.headers["x-api-key"]; // This line extracts the API key from the request headers. It looks for a header named x-api-key.
@@ -22,15 +31,3 @@ require("dotenv").config();
 //     res.sendStatus(500); //This line sends a 500 status code response, indicating an internal server error.
 //   }
 // }
-const validateApiKey = (req, res, next) => {
-  const apiKey = req.headers["x-api-key"];
-  console.log(`Received API Key: ${apiKey}`);
-  console.log(`Orignal API Key :${process.env.API_KEY}`);
-  if (apiKey === process.env.API_KEY) {
-    next();
-  } else {
-    res.status(403).send("Forbidden: Invalid API Key");
-  }
-};
-
-module.exports = validateApiKey;
