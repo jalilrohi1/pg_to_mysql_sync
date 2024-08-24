@@ -32,7 +32,7 @@ subscriber.notifications.on("data_change", async (payload) => {
 
     // Construct the URL
     const url = new URL(`${process.env.SYNC_URL}/sync`);
-    //console.log("Constructed URL:", url.toString());
+    console.log("Constructed URL:", url.toString());
 
     // Send a POST request to the /sync endpoint
     await axios.post(

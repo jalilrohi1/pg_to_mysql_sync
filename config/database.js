@@ -1,4 +1,4 @@
-const { Sequelize } = require("sequelize"); // Import the Sequelize constructor from the sequelize package. Sequelize is an ORM for Node.js that supports multiple dialects.
+const Sequelize = require("sequelize"); // Import the Sequelize constructor from the sequelize package. Sequelize is an ORM for Node.js that supports multiple dialects.
 
 require("dotenv").config(); // Import and execute the config function from the dotenv package. This loads environment variables from a .env file into process.env.
 
