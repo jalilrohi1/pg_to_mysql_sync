@@ -1,7 +1,8 @@
 const express = require("express"); // Import the express module to create an HTTP server.
 const { pgSequelize, mysqlSequelize } = require("./config/database"); // Import Sequelize instances for PostgreSQL and MySQL from a local configuration file.
-//const httpsOptions = require("./config/https"); // Import HTTPS options (like SSL certificates) for creating an HTTPS server.
+const httpsOptions = require("./config/https"); // Import HTTPS options (like SSL certificates) for creating an HTTPS server.
 const syncRouter = require("./routes/sync"); // Import the router for the synchronization endpoint from the routes directory.
+const https = require("https"); // Import the https module to create an HTTPS server.
 
 require("dotenv").config();
 // const https = require("https"); // Import the https module
@@ -14,6 +15,8 @@ const port = process.env.PORT || 3000; // Determine the port to listen on from a
 const helmet = require("helmet"); // Import the helmet module for setting HTTP headers for security.
 app.use(helmet()); // Use helmet middleware in the Express app to enhance security.
 
+
+
 // Middleware for JSON parsing
 app.use(express.json()); // Use the built-in middleware in Express to parse incoming requests with JSON payloads.
 
@@ -25,9 +28,8 @@ pgSequelize.sync().then(() => {
   // Synchronize the PostgreSQL database using Sequelize. This ensures that the database schema matches the models defined in the application.
   mysqlSequelize.sync().then(() => {
     // After synchronizing the PostgreSQL database, synchronize the MySQL database.
-    //const https = require("https"); // Import the https module to create an HTTPS server.
-    //https.createServer(httpsOptions, app).listen(port, () => { // Create an HTTPS server with the specified options and the Express app, then listen on the specified port.
-    app.listen(port, () => {
+    https.createServer(httpsOptions, app).listen(3000, () => { // Create an HTTPS server with the specified options and the Express app, then listen on the specified port.
+   // app.listen(port, () => {
       console.log(`Server listening on port ${port}`);
 
       // Start the PostgreSQL listener

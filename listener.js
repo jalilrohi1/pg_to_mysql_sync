@@ -18,7 +18,7 @@ subscriber.events.on("error", (error) => {
 subscriber.notifications.on("data_change", async (payload) => {
   try {
     // Log the raw payload once
-    //console.log("Raw payload:", payload);
+    console.log("Raw payload on listner :", payload);
 
     const { operation, table, data: rowData, primaryKeycol } = payload;
 
@@ -34,6 +34,11 @@ subscriber.notifications.on("data_change", async (payload) => {
     const url = new URL(`${process.env.SYNC_URL}/sync`);
     console.log("Constructed URL:", url.toString());
 
+  // Create an HTTPS agent for Axios
+    const httpsAgent = new (require('https')).Agent({
+      rejectUnauthorized: false // Disable SSL verification for development purposes
+    });
+
     // Send a POST request to the /sync endpoint
     await axios.post(
       url.toString(),
@@ -43,6 +48,7 @@ subscriber.notifications.on("data_change", async (payload) => {
           Authorization: `Bearer ${process.env.JWT_SECRET}`,
           "x-api-key": process.env.API_KEY,
         },
+      httpsAgent: process.env.NODE_ENV !== 'production' ? httpsAgent : undefined // Use the agent only in non-production environments
       }
     );
   } catch (error) {

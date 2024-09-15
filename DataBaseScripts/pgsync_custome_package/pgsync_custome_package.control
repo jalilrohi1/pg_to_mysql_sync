@@ -1,0 +1,11 @@
+# pgsync_custome_package.control
+comment = 'Custom package for creating data change triggers'
+default_version = '1.0'
+schema = 'pgsync_custome_package'
+relocatable = true
+
+-- Specify the SQL scripts to be executed
+install = 'create_schema.sql'
+install = 'notify_data_change.sql'
+install = 'create_triggers.sql'
+install = 'drop_triggers.sql'
