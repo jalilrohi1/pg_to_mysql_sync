@@ -27,26 +27,8 @@ console.log(getType("hello")); // "string"
 console.log(getType(true)); // "boolean"
 console.log(getType(new Date())); // "object"
 console.log(getType({ x: 1, y: 2 })); // "point"
-console.log(
-  getType([
-    { x: 1, y: 2 },
-    { x: 3, y: 4 },
-  ])
-); // "lseg"
+console.log(getType([{ x: 1, y: 2 },{ x: 3, y: 4 },])); // "lseg"
 console.log(getType({ center: { x: 1, y: 2 }, radius: 5 })); // "circle"
-console.log(
-  getType([
-    { x: 1, y: 2 },
-    { x: 3, y: 4 },
-    { x: 5, y: 6 },
-  ])
-); // "polygon"
+console.log(getType([{ x: 1, y: 2 },{ x: 3, y: 4 },{ x: 5, y: 6 },])); // "polygon"
 console.log(getType({ start: { x: 1, y: 2 }, end: { x: 3, y: 4 } })); // "line"
-console.log(
-  getType([
-    { x: 1, y: 2 },
-    { x: 3, y: 4 },
-    { x: 5, y: 6 },
-    { x: 7, y: 8 },
-  ])
-); // "box"
+console.log(getType([{ x: 1, y: 2 },{ x: 3, y: 4 },{ x: 5, y: 6 },{ x: 7, y: 8 },])); // "box"

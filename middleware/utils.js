@@ -1,7 +1,7 @@
 const { DataTypes, fn, col } = require("sequelize");
 const wkx = require("wkx"); // Import wkx to help recognize and handle geometric data
 
-function getModelAttributes(data, primaryKeycol) {
+async function getModelAttributes(data, primaryKeycol) {
   const attributes = {};
   const primaryKeys = Object.keys(primaryKeycol);
 
@@ -11,15 +11,7 @@ function getModelAttributes(data, primaryKeycol) {
     if (dataType === "geometry") {
       data[key] = fn("ST_GeomFromText", value);
     }
-    console.log(
-      "attributes in getModelAttributes: ________________________ ",
-      attributes
-    );
-    console.log("key in getModelAttributes: __________________________ ", key);
-    console.log(
-      "value in getModelAttributes: ______________________________ ",
-      value
-    );
+
     if (primaryKeys.includes(key)) {
       attributes[key].primaryKey = true;
     }
@@ -67,4 +59,3 @@ function isGeometry(value) {
 }
 
 module.exports = { getModelAttributes };
-
