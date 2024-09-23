@@ -23,7 +23,7 @@ pgSequelize.sync().then(() => {
   // Synchronize the PostgreSQL database using Sequelize. This ensures that the database schema matches the models defined in the application.
   mysqlSequelize.sync().then(() => {
     // After synchronizing the PostgreSQL database, synchronize the MySQL database.
-    https.createServer(httpsOptions, app).listen(3000, () => { // Create an HTTPS server with the specified options and the Express app, then listen on the specified port.
+    https.createServer(httpsOptions, app).listen(port, () => { // Create an HTTPS server with the specified options and the Express app, then listen on the specified port.
    // app.listen(port, () => {
       console.log(`Server listening on port ${port}`);
       // Start the PostgreSQL listener
