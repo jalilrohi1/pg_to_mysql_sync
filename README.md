@@ -20,3 +20,5 @@ sudo service name-of-api status
 #### MODE=manual || atuomatic || auto-check
 
 we can set or change the mode from .env file
+
+**Note we can run the API in Manual Mode from anywhere using the end point <code>.../sync/trigger-synctomysql</code>**
