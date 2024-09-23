@@ -8,7 +8,7 @@ A RESTful API which synchronize the PostgreSQL to MySQL
 
 <code> sudo ./install-api.sh </code>
 ### Managing the API Service
-**Now we can start, stop, or restart your API service using the following commands:**
+**Now we can start, stop, or restart our API service using the following commands:**
 
 <code>sudo service name-of-api start
 sudo service name-of-api stop
