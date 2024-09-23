@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Function to ask for confirmation
 confirm() {
   while true; do
@@ -38,7 +37,7 @@ fi
 read -p "Enter the username that will run the API: " USER
 
 # Ask for the application name
-read -p "Enter the name of your application (e.g., express-api): " APP_NAME
+read -p "Enter the name of your application (e.g., PG_TO_MYSQL_SYNC): " APP_NAME
 
 # Ask for the application directory
 read -p "Enter the path to your Express API directory: " APP_DIR
@@ -51,13 +50,20 @@ fi
 
 # Ask to update .env variables (example for DB_HOST and DB_USER)
 if confirm "Do you want to update .env file variables?"; then
-  read -p "Enter the new value for DB_HOST (e.g., localhost): " DB_HOST
-  read -p "Enter the new value for DB_USER: " DB_USER
+  read -p "Enter the new value for MYSQL_DATABASE_URL. eg(mysql://root:Genova@localhost:3306/mysql_test_api): " MYSQL_DATABASE_URL
+  read -p "Enter the new value for POSTGRES_DATABASE_URL. eg(postgres://postgres:Genova@localhost:5432/pg_test_api): " POSTGRES_DATABASE_URL
+  read -p "Enter the URL OR IP for the API. eg:(https://localhost:3000): " SYNC_URL
+  read -p "Enter the mode for the API. eg(# MODE=auto-check || manual || atuomatic): " MODE
+  read -p "Enter the path for the HTTPS_KEY_PATH: " HTTPS_KEY_PATH
+  read -p "Enter the path fot the HTTPS_Cert_PATH: "  HTTPS_CERT_PATH
 
   # Update .env file with the new values
-  update_env "DB_HOST" "$DB_HOST"
-  update_env "DB_USER" "$DB_USER"
-
+  update_env "MYSQL_DATABASE_URL" "$MYSQL_DATABASE_URL"
+  update_env "POSTGRES_DATABASE_URL" "$POSTGRES_DATABASE_URL"
+  update_env "SYNC_URL" "$SYNC_URL"
+  update_env "MODE" "$MODE"
+  update_env "HTTPS_KEY_PATH" "$HTTPS_KEY_PATH"
+  update_env "HTTPS_CERT_PATH" "$HTTPS_CERT_PATH"
   echo ".env file updated."
 fi
 
