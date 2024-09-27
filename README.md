@@ -2,7 +2,7 @@
 ## Overview
 The pg_to_mysql_sync API is designed to synchronize data between a PostgreSQL and MySQL database. It operates based on specific triggers in PostgreSQL that notify the API of any data changes (insert, update, delete). Depending on the application mode, the API processes the data accordingly.
 
-## installaion
+## installation
 **copy the API or clone to the location where you want to install**
 
 ***and then just run the follwoing command from inside of the API Directory***
