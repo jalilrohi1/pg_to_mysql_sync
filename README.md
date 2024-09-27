@@ -2,7 +2,7 @@
 ## Overview
 The pg_to_mysql_sync API is designed to synchronize data between a PostgreSQL and MySQL database. It operates based on specific triggers in PostgreSQL that notify the API of any data changes (insert, update, delete). Depending on the application mode, the API processes the data accordingly.
 
-## installation
+## Installation
 **copy the API or clone to the location where you want to install**
 
 ***and then just run the follwoing command from inside of the API Directory***
@@ -30,7 +30,7 @@ we can set or change the mode from .env file
 - **Text file backup:** Stores data temporarily in text files for later synchronization if necessary.
 - **Secure:** Implements security best practices using libraries like helmet and jsonwebtoken.
 
-## Technologise used:
+## Technologies used:
 - **Node.js:** The core of the API backend.
 - **Express:** A fast web framework for Node.js used to create the API endpoints.
 - **PostgreSQL (pg):** Used to handle communication with the PostgreSQL database.
