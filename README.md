@@ -1,5 +1,6 @@
-# pg_to_mysql_sync
-A RESTful API which synchronize the PostgreSQL to MySQL 
+# pg_to_mysql_sync API Documentation
+## Overview
+The pg_to_mysql_sync API is designed to synchronize data between a PostgreSQL and MySQL database. It operates based on specific triggers in PostgreSQL that notify the API of any data changes (insert, update, delete). Depending on the application mode, the API processes the data accordingly.
 
 ## installaion
 **copy the API or clone to the location where you want to install**
@@ -21,16 +22,8 @@ sudo service name-of-api status
 
 we can set or change the mode from .env file
 
-**Note we can run the API in Manual Mode from anywhere using the end point <code>.../sync/trigger-synctomysql</code>**
+**Note we can run the API in Manual Mode from anywhere using the end point <code>.../sync/trigger-synctomysql</code> but we should provide the API Key And JWT**
 
-# How the API Works (flow of API)
-  1. When the user Insert,Update, or Delete the data from Postgres DB then if we set our trigger on the teble on which user performed the action then the trigger will call the notify data change function and the function will notify the API, with *Operation(insert,delete,update), Data, and Table Name*
-  2. The API is listing to the *port* which we assign when Postgres notify the API the API will recieved the data and save it to a text file after it will process the data as per the mode of application we set to the API.
-  3. if the Mode is automatic the API will call the rout and perform the operation on the data.
-  4. if the mode is auto-check then the API will check the connection on interval time which we give it, and when ever it succeeded to connect then it will insert all the data which is save in the text files and it will delete the files.
-  5. if the mode is manual the it will just save the data into a text file and when ever we call the */trigger-synctomysql* manueually.
-
-# API Explanation
 ## Key Features
 - **Real-time synchronization:** Synchronizes changes made to a PostgreSQL database with a MySQL database.
 - **Configurable modes:** Supports automatic, auto-check, and manual modes for data synchronization.
@@ -50,6 +43,27 @@ we can set or change the mode from .env file
 - **jsonwebtoken:** Used for securing routes via token-based authentication.
 - **API Key:** used for the authorization
 
+## How the API Works (Flow of Operations)
+
+### 1. Triggering the API
+When a user inserts, updates, or deletes data in the PostgreSQL database, a trigger is activated on the table.
+The trigger calls a notify data change function, which sends the following information to the API:
+- **Operation** (insert, delete, update)
+- **Data** (the actual data that was changed)
+- **Table Name** (the table where the action occurred)
+
+### 2. API Listener
+The API listens on a designated port for PostgreSQL notifications.
+Upon receiving data, the API saves it into a text file for backup purposes.
+The API processes the data based on the mode set in the configuration.
+
+### 3. Modes of Operation
+- **Automatic Mode**: In this mode, the API immediately processes the data by calling the relevant route and performing operations on the received data.
+
+- **Auto-Check Mode**: The API regularly checks for database connectivity at an interval defined by the user. If the connection is successful, it inserts all data stored in text files into the MySQL database and then deletes the files.
+
+- **Manual Mode**: The API saves the received data into text files without performing any further operations. When the `/trigger-synctomysql` route is called manually, it processes and inserts the data into MySQL.
+
  ## Dependencies
 
 ### Production Dependencies:
@@ -66,4 +80,57 @@ we can set or change the mode from .env file
 
 ### Development Dependencies:
 - **nodemon**: ^3.1.4
-  
+
+## Project Structure
+<code>
+pg_to_mysql_sync/
+│
+├── .env                         # Environment variables for database URIs, ports, etc.
+├── .gitignore                   # Ignored files and directories for Git
+├── certificate/                 # SSL/TLS certificates for HTTPS
+│   ├── selfsigned.crt           # Self-signed certificate
+│   └── selfsigned.key           # Private key for the self-signed certificate
+│
+├── config/                      # Configuration files
+│   ├── database.js              # Database connection configurations for PostgreSQL and MySQL
+│   └── https.js                 # HTTPS configuration setup
+│
+├── DataBaseScripts/              # SQL scripts for setting up database functions and triggers
+│   ├── notifyDataChangeFunction.sql  # SQL script for Postgres notify function
+│   └── trigger.sql              # SQL script to create database triggers
+│
+├── pgsync_custome_package/       # Custom PostgreSQL sync package scripts
+│   └── trigger.sql              # Custom trigger logic for syncing
+│
+├── datalog/                     # Directory for logging data changes and API sync logs
+│
+├── install-api.sh               # Shell script for installing and configuring the API
+│
+├── listener.js                  # Listens to PostgreSQL notifications and triggers the sync process
+│
+├── middleware/                  # Middleware functions for API requests
+│   ├── apiKey.js                # Validates API key from request headers
+│   ├── auth.js                  # Token-based authentication middleware
+│   ├── deletetextfiles.js       # Deletes text files after successful sync
+│   ├── logToFile.js             # Middleware to log data changes to a file
+│   ├── readLogFiles.js          # Reads log files for processing
+│   ├── syncfailedlog.js         # Logs failed synchronization attempts
+│   ├── synctomyysql.js          # Handles syncing data from PostgreSQL to MySQL
+│   ├── testmysqlconnection.js   # Tests the connection to the MySQL database
+│   └── utils.js                 # Utility functions for general purpose tasks
+│
+├── models/                      # Database models
+│   ├── ApiKey.js                # Model for managing API keys
+│   ├── index.js                 # Centralized exports for all models
+│   └── MysqlModel.js            # Model and schema for MySQL operations
+│
+├── package.json                 # Project metadata and dependencies
+├── pgsync_custome_package.md    # Documentation for custom Postgres sync package
+├── README.md                    # Main project documentation
+│
+├── routes/                      # API routes (empty in this structure for brevity)
+│
+├── server.js                    # Entry point for the API server
+│
+├── testing_code/                # Directory for any test scripts or code samples
+</code>
