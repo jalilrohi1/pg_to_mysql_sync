@@ -36,9 +36,13 @@ fi
 # Ask for the username
 read -p "Enter the username that will run the API: " USER
 
+# Default Application Name
+APP_NAME="PG_TO_MYSQL_SYNC"
 # Ask for the application name
-read -p "Enter the name of your application (e.g., PG_TO_MYSQL_SYNC): " APP_NAME
-
+# Prompt the user to confirm or change the default application name
+#read -p "Enter the name of your application [$APP_NAME]: " input_name
+#APP_NAME=${input_name:-$APP_NAME}
+echo "Using application name: $APP_NAME"
 # Ask for the application directory
 read -p "Enter the path to your Express API directory: " APP_DIR
 
