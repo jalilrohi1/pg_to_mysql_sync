@@ -9,16 +9,16 @@ The pg_to_mysql_sync API is designed to synchronize data between a PostgreSQL an
 
 <code> sudo ./install-api.sh </code>
 ### Managing the API Service
-**Now we can start, stop, or restart our API service using the following commands:**
+**Now we can start, stop, or restart our API service as root (or via sudo) using the following commands:**
 
-<code>sudo service name-of-api start
-sudo service name-of-api stop
-sudo service name-of-api restart
-sudo service name-of-api status
+<code>service name-of-api start
+service name-of-api stop
+service name-of-api restart
+service name-of-api status
 </code>
 
 ## The API will work in three modes
-#### MODE=manual || atuomatic || auto-check
+#### MODE=manual || automatic || auto-check
 
 we can set or change the mode from .env file
 
