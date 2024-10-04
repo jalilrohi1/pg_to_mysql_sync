@@ -1,36 +1,30 @@
 # pg_to_mysql_sync API Documentation
 ## Overview
 The pg_to_mysql_sync API is designed to synchronize data between a PostgreSQL and MySQL database. It operates based on specific triggers in PostgreSQL that notify the API of any data changes (insert, update, delete). Depending on the application mode, the API processes the data accordingly.
-
 ## Installation
-**copy the API or clone to the location where you want to install**
-
-***and then just run the follwoing command from inside of the API Directory***
-
-<code> sudo ./install-api.sh </code>
+**copy the API or clone to the location where you want to install**  
+***and then just run the following command as root (or use sudo) from inside the API Directory***  
+``` 
+./install-api.sh 
+ ```
 ### Managing the API Service
-**Now we can start, stop, or restart our API service as root (or via sudo) using the following commands:**
-
-<code>service name-of-api start
-service name-of-api stop
-service name-of-api restart
-service name-of-api status
-</code>
-
-## The API will work in three modes
-#### MODE=manual || automatic || auto-check
-
-we can set or change the mode from .env file
-
-**Note we can run the API in Manual Mode from anywhere using the end point <code>.../sync/trigger-synctomysql</code> but we should provide the API Key And JWT**
-
+**Now we can start, stop, or restart our API service using the following commands:**
+```
+ service pg_to_mysql_sync start
+ service pg_to_mysql_sync stop
+ service pg_to_mysql_sync restart
+ service pg_to_mysql_sync status
+```
+## Modes of Operation
+#### MODE=manual || automatic || auto-check  
+we can set or change the mode from .env file  
+**Note we can run the API in Manual Mode from anywhere using the end point <code>.../sync/trigger-synctomysql</code> but we should provide the API Key And JWT**  
 ## Key Features
 - **Real-time synchronization:** Synchronizes changes made to a PostgreSQL database with a MySQL database.
 - **Configurable modes:** Supports automatic, auto-check, and manual modes for data synchronization.
 - **Text file backup:** Stores data temporarily in text files for later synchronization if necessary.
-- **Secure:** Implements security best practices using libraries like helmet and jsonwebtoken.
-
-## Technologies used:
+- **Secure:** Implements security best practices using libraries like helmet and jsonwebtoken.  
+## Technologise used:
 - **Node.js:** The core of the API backend.
 - **Express:** A fast web framework for Node.js used to create the API endpoints.
 - **PostgreSQL (pg):** Used to handle communication with the PostgreSQL database.
@@ -41,31 +35,46 @@ we can set or change the mode from .env file
 - **dotenv:** Loads environment variables from a .env file.
 - **Helmet:** Adds security-related headers to protect the API.
 - **jsonwebtoken:** Used for securing routes via token-based authentication.
-- **API Key:** used for the authorization
-
-## How the API Works (Flow of Operations)
-
+- **API Key:** used for the authorization  
+## How the API Works (Flow of Operations)  
 ### 1. Triggering the API
 When a user inserts, updates, or deletes data in the PostgreSQL database, a trigger is activated on the table.
 The trigger calls a notify data change function, which sends the following information to the API:
 - **Operation** (insert, delete, update)
 - **Data** (the actual data that was changed)
-- **Table Name** (the table where the action occurred)
-
-### 2. API Listener
+- **Table Name** (the table where the action occurred)  
+### 2. API Listener  
 The API listens on a designated port for PostgreSQL notifications.
 Upon receiving data, the API saves it into a text file for backup purposes.
-The API processes the data based on the mode set in the configuration.
-
+The API processes the data based on the mode set in the configuration.  
 ### 3. Modes of Operation
-- **Automatic Mode**: In this mode, the API immediately processes the data by calling the relevant route and performing operations on the received data.
-
-- **Auto-Check Mode**: The API regularly checks for database connectivity at an interval defined by the user. If the connection is successful, it inserts all data stored in text files into the MySQL database and then deletes the files.
-
-- **Manual Mode**: The API saves the received data into text files without performing any further operations. When the `/trigger-synctomysql` route is called manually, it processes and inserts the data into MySQL.
-
- ## Dependencies
-
+- **Automatic Mode**: In this mode, the API immediately processes the data by calling the relevant route and performing operations on the received data.  
+- **Auto-Check Mode**: The API regularly checks for database connectivity at an interval defined by the user. If the connection is successful, it inserts all data stored in text files into the MySQL database and then deletes the files.  
+- **Manual Mode**: The API saves the received data into text files without performing any further operations. When the `/trigger-synctomysql` route is called manually, it processes and inserts the data into MySQL.  
+## Dependencies
+The API relies on Node.js modules, which are managed using npm (Node Package Manager). These dependencies are automatically installed when running `npm install`  
+### Node.js Modules  
+The key dependencies used in the API include:
+`express`: A web framework for handling HTTP requests.  
+`pg`: PostgreSQL client for Node.js.  
+`mysql2`: MySQL client for Node.js.  
+`pg-listen`: Listens for PostgreSQL notifications.  
+`Other modules`: dotenv, axios, jsonwebtoken, helmet, etc.  
+**Installing Dependencies**  
+To install the required dependencies, simply run the following command in the project root directory:
+```
+npm install
+```  
+This will install all the necessary modules specified in the package.json file.  
+### Managing Dependencies  
+**Install:** To install new dependencies, run `npm install <package-name>`.  
+**Upgrade:** To upgrade dependencies, you can use `npm update`. For specific packages, you can run `npm install <package-name>@latest`.  
+**Automated:** The dependency installation is automated during setup, it is included in installation script (<code>install-api.sh</code>).  
+### Minimum Node.js Version  
+The minimum Node.js version required to run this API is Node.js v14.x or higher. You can verify your Node.js version by running:  
+```
+node -v
+```  
 ### Production Dependencies:
 - **axios**: ^1.7.2
 - **dotenv**: ^10.0.0
@@ -76,13 +85,11 @@ The API processes the data based on the mode set in the configuration.
 - **mysql2**: ^3.11.0
 - **pg**: ^8.6.0
 - **pg-listen**: ^1.7.0
-- **sequelize**: ^6.6.2
-
-### Development Dependencies:
-- **nodemon**: ^3.1.4
-
-## Project Structure
-<code>
+- **sequelize**: ^6.6.2  
+### Development Dependencies:  
+- **nodemon**: ^3.1.4  
+## Project Structure  
+```
 pg_to_mysql_sync/
 │
 ├── .env                         # Environment variables for database URIs, ports, etc.
@@ -117,7 +124,7 @@ pg_to_mysql_sync/
 │   ├── syncfailedlog.js         # Logs failed synchronization attempts
 │   ├── synctomyysql.js          # Handles syncing data from PostgreSQL to MySQL
 │   ├── testmysqlconnection.js   # Tests the connection to the MySQL database
-│   └── utils.js                 # Utility functions for general purpose tasks
+│   └── utils.js                 # Utility functions for general-purpose tasks
 │
 ├── models/                      # Database models
 │   ├── ApiKey.js                # Model for managing API keys
@@ -128,9 +135,18 @@ pg_to_mysql_sync/
 ├── pgsync_custome_package.md    # Documentation for custom Postgres sync package
 ├── README.md                    # Main project documentation
 │
-├── routes/                      # API routes (empty in this structure for brevity)
+├── routes/                      # API routes
+│   ├── sync.js                  # Handles synchronization-related routes (e.g., '/sync')
 │
 ├── server.js                    # Entry point for the API server
 │
 ├── testing_code/                # Directory for any test scripts or code samples
-</code>
+```  
+## Key Files & Directories:  
+- listener.js: Handles PostgreSQL notifications and triggers sync operations.
+- routes/sync.js: Defines routes related to synchronization, such as syncing data from PostgreSQL to MySQL.
+- server.js: The main entry point for the API, sets up the Express server, routes, and PostgreSQL listener.
+- middleware/: Contains various middleware functions for request validation, logging, and security.
+- config/: Stores configuration files, including database connections and HTTPS setup.
+- models/: Defines the database schemas and models for both PostgreSQL and MySQL.
+- DataBaseScripts/: Holds SQL scripts for setting up database triggers and notification functions.
