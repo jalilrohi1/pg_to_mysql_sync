@@ -13,7 +13,7 @@ We appreciate your interest in contributing to pg_to_mysql_sync! Here are the gu
 Please follow these standards for all contributions:
 To maintain high-quality contributions to the project, please adhere to the following specific guidelines when working with our Express.js API that synchronizes PostgreSQL with MySQL.
 
-1. Coding Standards
+### 1. Coding Standards
 - JavaScript/Node.js Version: Ensure that your code is compatible with the project's supported Node.js version. We currently support Node.js 14.x and above.
 - Code Style: Follow the Airbnb JavaScript Style Guide. Use tools like ESLint to ensure your code is consistent with this style guide. Some specific rules include:
   - Use 2 spaces for indentation (no tabs).
@@ -21,12 +21,51 @@ To maintain high-quality contributions to the project, please adhere to the foll
   - Always use const or let (no var).
   - Use single quotes for strings (') unless you are using string interpolation with backticks (``).
 - Module Imports: Use ES6+ syntax for imports and exports:
-`import express from 'express';
+```
+import express from 'express';
 import { syncPostgresToMySQL } from './services/syncService';
-`
+```
+- No Direct Database Access: Avoid writing SQL queries directly inside route handlers. Use data access services (like syncService) to encapsulate all database interactions.
 - Ensure code is well-documented.
 - Write meaningful commit messages.
 
+### 2. Folder Structure
+The project follows a modular structure to keep things organized. Please ensure new files or services are added in the appropriate directories:
+
+- /routes: Define route handlers here.
+- /middleware: Place logic for database synchronization, querying, and business logic here.
+- /models: Use Sequelize or TypeORM to define models for both PostgreSQL and MySQL databases here.
+- /config: Store configuration files like database credentials and environment settings (make sure sensitive data is excluded from version control via .gitignore).
+- /tests: All tests, including unit and integration tests, should go here.
+- /docs: Add or update API documentation here (e.g., using Swagger or Postman collections).
+### 3. Database Operations
+- Use ORM libraries like Sequelize (preferred) or TypeORM for interacting with both PostgreSQL and MySQL.
+- Transactional Safety: Always use transactions when performing multiple database operations that need to be atomic. Both PostgreSQL and MySQL support transactions, and they should be used to ensure data consistency during synchronization.
+- Error Handling: Use proper error handling around database operations, ensuring that any failure in synchronization triggers proper rollback mechanisms for both databases.
+```
+try {
+  await sequelize.transaction(async (t) => {
+    const result1 = await Model1.create(data, { transaction: t });
+    const result2 = await Model2.create(data, { transaction: t });
+    return result1;
+  });
+} catch (error) {
+  console.error('Transaction failed:', error);
+  throw new Error('Database synchronization failed');
+}
+```
+### 4. Sync Logic
+- Data Integrity: When synchronizing data between PostgreSQL and MySQL, ensure that data validation and transformation steps are clearly defined and handled inside the syncService.
+- Database Migrations: Use migration tools (like Sequelize's migration system) to handle database schema changes consistently across both databases. Include migration scripts for both PostgreSQL and MySQL.
+- Conflict Resolution: If synchronization conflicts arise (e.g., data discrepancies between PostgreSQL and MySQL), handle them within the service layer and log any unresolved issues for future review.
+### 5. API Routes
+- RESTful Principles: Ensure API routes follow RESTful conventions:
+  - GET /sync: Triggers a synchronization task between PostgreSQL and MySQL.
+  - GET /status: Returns the current synchronization status.
+- HTTP Status Codes: Return appropriate HTTP status codes for each response. For example:
+  - 200 OK for successful sync operations.
+  - 400 Bad Request for invalid inputs.
+  - 500 Internal Server Error for synchronization errors.
 ## Submitting Issues
 If you find a bug or have a feature request, please use one of the following templates:
 - **Bug Report**: [Link to bug report template]
