@@ -87,7 +87,7 @@ describe('syncPostgresToMySQL', () => {
 ```
 ## Submitting Issues
 If you find a bug or have a feature request, please use one of the following templates:
-- **Bug Report**: [Bug Report Template](https://github.com/jalilrohi1/pg_to_mysql_sync/.github/ISSUE_TEMPLATE/bug_report.md)
+- **Bug Report**: [Bug Report Template](https://github.com/jalilrohi1/pg_to_mysql_sync/blob/main/.github/ISSUE_TEMPLATE/bug_report.md)
 - **Feature Request**: [Feature Request Template](https://github.com/jalilrohi1/pg_to_mysql_sync/.github/ISSUE_TEMPLATE/feature_request.md)
 
 ## Code Reviews
