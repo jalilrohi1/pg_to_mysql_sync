@@ -87,8 +87,8 @@ describe('syncPostgresToMySQL', () => {
 ```
 ## Submitting Issues
 If you find a bug or have a feature request, please use one of the following templates:
-- **Bug Report**: [Link to bug report template]
-- **Feature Request**: [Link to feature request template]
+- **Bug Report**: [Bug Report Template](https://github.com/your-repo/your-project/.github/ISSUE_TEMPLATE/bug_report.md)
+- **Feature Request**: [Feature Request Template](https://github.com/your-repo/your-project/.github/ISSUE_TEMPLATE/feature_request.md)
 
 ## Code Reviews
 All pull requests will be reviewed. Please be patient as we work through them. Be prepared for constructive feedback. Multiple reviews might be necessary.
@@ -96,6 +96,6 @@ All pull requests will be reviewed. Please be patient as we work through them. B
 ## Vision and Roadmap
 [Brief summary of your vision for the API]
 
-For more details on where the project is headed, check out our [public roadmap comming soon...](link to roadmap).
+For more details on where the project is headed, check out our For more details on where the project is headed, check out our [public roadmap](https://github.com/your-repo/your-project/ROADMAP.md).
 
 Thank you for contributing!
