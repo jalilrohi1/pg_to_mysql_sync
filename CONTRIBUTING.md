@@ -87,8 +87,8 @@ describe('syncPostgresToMySQL', () => {
 ```
 ## Submitting Issues
 If you find a bug or have a feature request, please use one of the following templates:
-- **Bug Report**: [Bug Report Template](https://github.com/your-repo/your-project/.github/ISSUE_TEMPLATE/bug_report.md)
-- **Feature Request**: [Feature Request Template](https://github.com/your-repo/your-project/.github/ISSUE_TEMPLATE/feature_request.md)
+- **Bug Report**: [Bug Report Template](https://github.com/jalilrohi1/pg_to_mysql_sync/.github/ISSUE_TEMPLATE/bug_report.md)
+- **Feature Request**: [Feature Request Template](https://github.com/jalilrohi1/pg_to_mysql_sync/.github/ISSUE_TEMPLATE/feature_request.md)
 
 ## Code Reviews
 All pull requests will be reviewed. Please be patient as we work through them. Be prepared for constructive feedback. Multiple reviews might be necessary.
@@ -100,6 +100,6 @@ The API aims to provide a seamless and efficient way to synchronize data between
 We are committed to maintaining code quality, security, and open collaboration to evolve this project and meet the growing needs of developers across industries.
 
 
-For more details on where the project is headed, check out our For more details on where the project is headed, check out our [public roadmap](https://github.com/your-repo/your-project/ROADMAP.md).
+For more details on where the project is headed, check out our For more details on where the project is headed, check out our [public roadmap](https://github.com/jalilrohi1/pg_to_mysql_sync/ROADMAP.md).
 
 Thank you for contributing!
