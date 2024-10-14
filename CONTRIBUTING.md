@@ -100,6 +100,6 @@ The API aims to provide a seamless and efficient way to synchronize data between
 We are committed to maintaining code quality, security, and open collaboration to evolve this project and meet the growing needs of developers across industries.
 
 
-For more details on where the project is headed, check out our For more details on where the project is headed, check out our [public roadmap](https://github.com/jalilrohi1/pg_to_mysql_sync/ROADMAP.md).
+For more details on where the project is headed, check out our For more details on where the project is headed, check out our [public roadmap](https://github.com/jalilrohi1/pg_to_mysql_sync/blob/main/ROADMAP.md).
 
 Thank you for contributing!
