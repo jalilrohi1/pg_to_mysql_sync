@@ -85,11 +85,21 @@ describe('syncPostgresToMySQL', () => {
   });
 });
 ```
+### 7. Documentation
+- **API Documentation:** Ensure all routes are properly documented using Swagger or a similar tool. Documentation should describe the expected request body, query parameters, and response formats.
+- **Code Comments:** Provide comments in your code to explain non-obvious logic, especially in database synchronization or critical processes.
+### 8. Security Considerations
+- **Environment Variables:** Do not hard-code sensitive information like database credentials. Use environment variables and ensure they are securely loaded via libraries like dotenv.
+- **Input Validation:** Always validate incoming data from API requests. Use libraries like **Joi** or **express-validator** to sanitize and validate inputs.
+- **SQL Injection Prevention:** Avoid dynamic SQL queries. Use parameterized queries with your ORM to prevent SQL injection attacks.
+### 9. Performance Optimization
+- **Batch Processing:** When syncing large datasets between PostgreSQL and MySQL, use batch processing to avoid memory overuse or long-running operations.
+- **Indexes:** Ensure that appropriate indexes are used on frequently queried columns to optimize read and write performance for both PostgreSQL and MySQL.
+
 ## Submitting Issues
 If you find a bug or have a feature request, please use one of the following templates:
-- **Bug Report**: [Bug Report Template](https://github.com/jalilrohi1/pg_to_mysql_sync/blob/main/.github/ISSUE_TEMPLATE/bug_report.md)
-- **Feature Request**: [Feature Request Template](https://github.com/jalilrohi1/pg_to_mysql_sync/.github/ISSUE_TEMPLATE/feature_request.md)
-
+- **Bug Report**: [Bug Report Template](https://github.com/jalilrohi1/pg_to_mysql_sync/blob/main/github/ISSUE_TEMPLATE/bug_report.md)
+- **Feature Request**: [Feature Request Template](https://github.com/jalilrohi1/pg_to_mysql_sync/blob/main/github/ISSUE_TEMPLATE/feature_request.md)
 ## Code Reviews
 All pull requests will be reviewed. Please be patient as we work through them. Be prepared for constructive feedback. Multiple reviews might be necessary.
 
@@ -101,5 +111,14 @@ We are committed to maintaining code quality, security, and open collaboration t
 
 
 For more details on where the project is headed, check out our For more details on where the project is headed, check out our [public roadmap](https://github.com/jalilrohi1/pg_to_mysql_sync/blob/main/ROADMAP.md).
+
+## Summary of Key Rules
+
+- Follow the **Airbnb JavaScript Style Guide** with consistent formatting enforced by **ESLint**.
+- Use **Sequelize** or **TypeORM** for database interactions and ensure **transactional safety** during synchronization.
+- Write tests for all new features and ensure a **90% test coverage** target.
+- Document all API routes using **Swagger** or similar tools.
+- Handle errors and sync conflicts gracefully, with **logging for further investigation**.
+
 
 Thank you for contributing!
