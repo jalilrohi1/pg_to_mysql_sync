@@ -66,6 +66,25 @@ try {
   - 200 OK for successful sync operations.
   - 400 Bad Request for invalid inputs.
   - 500 Internal Server Error for synchronization errors.
+### 6. Testing
+- Unit Tests: Write unit tests for all new services or utility functions. Mock database interactions using tools like Sinon or Jest mocks.
+- Integration Tests: Ensure integration tests cover synchronization between PostgreSQL and MySQL, testing the full process.
+- Test Coverage: We aim for a minimum of 90% test coverage for both unit and integration tests. Use Jest or Mocha for testing.
+- CI Pipeline: Ensure that all tests pass in the CI pipeline (GitHub Actions). Any contribution that breaks the CI pipeline will not be merged
+  
+Example of unit testing a sync service:
+```
+import { syncPostgresToMySQL } from '../services/syncService';
+import { expect } from 'chai';
+
+describe('syncPostgresToMySQL', () => {
+  it('should sync data successfully', async () => {
+    const result = await syncPostgresToMySQL();
+    expect(result).to.be.an('object');
+    expect(result.success).to.be.true;
+  });
+});
+```
 ## Submitting Issues
 If you find a bug or have a feature request, please use one of the following templates:
 - **Bug Report**: [Link to bug report template]
@@ -77,6 +96,6 @@ All pull requests will be reviewed. Please be patient as we work through them. B
 ## Vision and Roadmap
 [Brief summary of your vision for the API]
 
-For more details on where the project is headed, check out our [public roadmap](link to roadmap).
+For more details on where the project is headed, check out our [public roadmap comming soon...](link to roadmap).
 
 Thank you for contributing!
